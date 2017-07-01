@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="row pageHeader">
+    <b>{{ tagline }}<b/>
+  </div>
+  <div class="form-group addSection">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group row">
+          <div class="col-md-10">
+              <label for="patient">Search for registered Patients</label>
+          </div>
+          <div class="col-md-8">
+        			<input name="patient" id="patient" type="text" placeholder="Please Enter Name" ng-model="selected"
+              uib-typeahead="p as p.firstName for p in patient | filter:$viewValue | limitTo:8" class="form-control"
+              typeahead-editable="false"
+              typeahead-on-select="onSelect($item, $model, $label)">
+          </div>
+        </div>
+
+        <div class="form-group row" ng-show="isReplyFormOpen">
+          <label class="col-md-4">First Name</label>
+          <div class="col-md-6">
+            <input class="form-control" type="text" ng-model="selected.firstName" readonly="readonly">
+          </div>
+        </div>
+        <div class="form-group row" ng-show="isReplyFormOpen">
+          <label class="col-md-4">Last Name</label>
+          <div class="col-md-6">
+            <input class="form-control" type="text" ng-model="selected.lastName" readonly="readonly">
+          </div>
+        </div>
+        <div class="form-group row" ng-show="isReplyFormOpen">
+          <label class="col-md-4">Contact Number</label>
+          <div class="col-md-6">
+            <input class="form-control" type="text" ng-model="selected.mobile" readonly="readonly">
+          </div>
+        </div>
+        <div class="form-group row" ng-show="isReplyFormOpen">
+          <label class="col-md-4">Select Fee</label>
+          <div class="col-md-6">
+            <select class="form-control" ng-model="selected.feeAmount"
+                ng-options="f.Desc for f in fee track by f._id"></select>
+                <!-- {{newPateint.Occupation}} -->
+          </div>
+        </div>
+        <div class="form-group row" ng-show="isReplyFormOpen">
+          <label class="col-md-4">Select Payment</label>
+          <div class="col-md-6">
+            <select class="form-control" ng-model="selected.paymentMade"
+                ng-options="f.Desc for f in fee track by f._id"></select>
+                <!-- {{newPateint.Occupation}} -->
+          </div>
+        </div>
+        <div class="form-group row" ng-show="isReplyFormOpen">
+          <label class="col-md-4">Type Settlement Amount</label>
+          <div class="col-md-6">
+            <input class="form-control" ng-model="selected.settlementAmount" type="Number" maxlength="5">{{selected.settlementAmount}}</input>
+          </div>
+        </div>
+        <div class="form-group row" ng-show="isReplyFormOpen">
+          <label class="col-md-4">Status</label>
+          <div class="col-md-6">
+            <div class="{{statusClass}}">{{statusClass}} = {{sum}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6" ng-show="isReplyFormOpen">
+        <div class="form-group row">
+          <label class="col-md-4">Avatar</label>
+          <div class="col-md-6">
+            <!-- <img ng-src="data:image/png;base64,{{image}}"/></div> -->
+            <img ng-src="{{selected.image}}" class="img-responsive"/></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row text-center" ng-show="isReplyFormOpen">
+    <input type="button" ng-click="submitFee()" class="btn btn-success" value="Save"/>
+  </div>
+
+  <!-- Table for data -->
+  <div class="form-group row tableSection" ng-show="showSubmittedFee">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th class="text-center success">Fee Amount</th>
+          <th class="text-center success">Submitted Date</th>
+          <th class="text-center success">Updated Date</th>
+          <th class="text-center success"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="x in submittedFee">
+          <td class="" ng-model="x.feeAmount">{{x.feeAmount}}</td>
+          <td class="" ng-model="x.created_at">{{x.created_at}}</td>
+          <td class="" ng-model="x.updated_at">{{x.updated_at}}</td>
+          <td class="text-center"><input type="button" ng-click="deletesubmitFee(x._id)" class="btn btn-danger btn-sm" value="Delete"/></td>
+          <!-- <td class="text-center"><input type="button" ng-click="editFee()" class="btn btn-primary btn-sm" value="Update"/></td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

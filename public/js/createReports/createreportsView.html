@@ -1,0 +1,37 @@
+<!-- public/views/nerd.html -->
+
+<div class="container">
+  <div class="row pageHeader">
+    <b>{{ tagline }}<b/>
+  </div>
+    <div class="form-group addSection">
+      <div class="row">
+        <label class="col-md-4">Select Chart For</label>
+        <div class="col-md-6">
+          <select class="form-control" ng-model="selected.chartFor" ng-change="changeSelection()"
+              ng-options="option.name for option in chartDetails track by option.id"></select>
+        </div>
+      </div>
+      <div class="row">
+        <label class="col-md-4">Select Chart Type</label>
+        <div class="col-md-6">
+        <select ng-model="chartType" class="form-control">
+		        <option value="pie">pie</option>
+		        <option value="bar">bar</option>
+		        <!-- <option value="line">line</option>
+		        <option value="point">point</option>
+		        <option value="area">area</option> -->
+	      </select>
+        <span ng-show="chartType==='pie'">
+        	<label for="innerRadius">Radius:</label>
+        	<input ng-model="config1.innerRadius" type="number" id="innerRadius" />
+        </span>
+      </div>
+      </div>
+      <br/>
+	   <div id="chart1" ac-chart="chartType" ac-data="data1" ac-config="config1"></div>
+
+	   <!-- <div id="chart2" ac-chart="chartType" ac-data="data2" ac-config="config2"></div> -->
+
+  </div>
+</div>

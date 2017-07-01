@@ -1,0 +1,38 @@
+<!-- public/views/nerd.html -->
+
+<div class="container">
+  <div class="row pageHeader">
+    <b>{{ tagline }}<b/>
+    </div>
+    <div class="form-group row addSection">
+
+      <div class="col-md-4">
+        <input class="form-control" type="text" ng-model="newTreatments.desc" placeholder="Please Type Treatment Name"/>
+      </div>
+
+      <div class="col-md-2">
+        <input type="button" ng-click="addTreatments()" class="btn btn-success" value="Save"/>
+      </div>
+    </div>
+
+    <!-- Table for data -->
+    <div class="form-group row tableSection">
+      <table class="table table-striped table-hover table-users">
+        <thead>
+          <tr>
+            <th class="text-center success">Treatment Name</th>
+            <th class="text-center success"></th>
+            <th class="text-center success"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="x in treatments">
+            <td class="" ng-model="x.Desc"><input class="form-control" type="text" ng-model="x.Desc"/></td>
+            <td class="text-center"><input type="button" ng-click="deleteTreatments(x._id)" class="btn btn-danger btn-sm" value="Delete"/></td>
+            <td class="text-center"><input type="button" ng-click="editTreatments(x._id, x.Desc)" class="btn btn-primary btn-sm" value="Update"/></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

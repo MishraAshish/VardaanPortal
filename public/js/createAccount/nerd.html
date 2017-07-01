@@ -1,0 +1,19 @@
+<!-- public/views/nerd.html -->
+
+<div class="jumbotron text-center">
+    <h1>Nerds and Proud</h1>
+
+    <p>{{ tagline }}</p>
+
+    <div class="row" ng-repeat="x in users">
+      <input type="text" ng-model="x.name"/>
+      <input type="text" ng-model="x.username"/>
+      <button ng-click="deleteUser(x.username)">DeleteUser<button>
+    </div>
+
+    <div class="row">
+      <input type="text" ng-model="newuser.name"/>
+      <input type="text" ng-model="newuser.username"/>
+      <button ng-click="addUser()">AddUser<button>
+    <div/>
+</div>

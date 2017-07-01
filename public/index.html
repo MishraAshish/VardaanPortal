@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <base href="/">
+
+  <title>Starter Node and Angular and RequireJS</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css"> <!-- custom styles -->
+</head>
+<body>
+  <header>
+  <nav id="nav" role="navigation"> <a href="#nav" title="Show navigation">Show navigation</a> <a href="#hide" title="Hide navigation">Hide navigation</a>
+    <ul class="clearfix">
+      <li><a ui-sref="home()">Home</a></li>
+      <li> <a href=""><span>Patients</span></a>
+        <ul>
+          <li><a ui-sref="cPCreateuser()">Register Pateints</a></li>
+          <li><a href="createDoctor">Register Doctors</a></li>
+        </ul>
+      </li>
+      <li> <a href=""><span>Accounts</span></a>
+        <ul>
+          <li><a href="submitFee">Submit Fees</a></li>
+          <li><a href="createExpenses">Add Amounts</a></li>
+        </ul>
+      </li>
+      <li> <a href=""><span>Register Informations</span></a>
+        <ul>
+          <li><a href="chiefComplaints">Cheif Complaints</a></li>
+          <li><a href="createDiagnosis">Diagnosis</a></li>
+          <li><a href="createTreatments">Treatments</a></li>
+          <li><a href="createOccupation">Occupation</a></li>
+          <li><a href="createUserLocation">User Location</a></li>
+          <li><a href="createCenter">Center</a></li>
+          <li><a href="createReferences">Reference Types</a></li>
+        </ul>
+      </li>
+      <li><a href=""><span>Expenses</span></a>
+        <ul>
+          <li><a href="createExpenseType">Expense Type</a></li>
+          <li><a href="submitExpenses">Submit Expenses</a></li>
+          <li><a href="createExpenses">Add Amounts</a></li>
+        </ul>
+      </li>
+      <li><a href="viewReports">Reports</a></li>
+      <!-- <li> <a href=""><span>Reports</span></a>
+        <ul>
+          <li><a href="viewReports">All Reports</a></li>
+        </ul>
+      </li> -->
+    </ul>
+  </nav>
+</header>
+<div ui-view></div>
+
+<!---Loading require.js-->
+<script src="lib/requirejs/require.js" data-main="js/main.js"></script>
+</body>
+</html>
