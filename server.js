@@ -6,11 +6,12 @@ var app            = express();
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var mongoose = require('mongoose');
+global.__base = __dirname + '/';
 // configuration ===========================================
 
 // config files
 //var db = require('./config/db');
- mongoose.connect('mongodb://localhost/myapp');
+ mongoose.connect('mongodb://localhost/myapp',{useMongoClient:true});
 // set our port
 var port = process.env.PORT || 8080;
 
@@ -20,14 +21,13 @@ var port = process.env.PORT || 8080;
 
 // get all data/stuff of the body (POST) parameters
 // parse application/json
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // parse application/vnd.api+json as json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 app.use(bodyParser.json({limit:'200mb', type:'application/json'}));
 // parse application/x-www-form-urlencoded
-//app.use(bodyParser.urlencoded({limit:'200mb', type:'application/x-www-form-urlencoding', extended: true}));
+app.use(bodyParser.urlencoded({limit:'200mb', type:'application/x-www-form-urlencoding', extended: true}));
 
 // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
 app.use(methodOverride('X-HTTP-Method-Override'));
@@ -36,8 +36,9 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(express.static(__dirname + '/public'));
 
 // routes ==================================================
-require('./app/routes')(app); // configure our routes
-
+//require('./app/routes')(app); // configure our routes
+var router = require('./app/routerTest');
+app.use('/api', router);
 // start app ===============================================
 // startup our app at http://localhost:8080
 app.listen(port);

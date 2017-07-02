@@ -13,4 +13,12 @@ var doctorSchema = new Schema({
 // the schema is useless so far
 // we need to create a model using it
 
-module.exports =  mongoose.model('doctor', doctorSchema);
+var DoctorSchema = mongoose.model('doctor', doctorSchema);
+
+if (mongoose.connection.readyState == 0) {
+  mongoose.connect('mongodb://localhost/myapp');
+  console.log("DB Connected");
+}
+console.log("DB Already Connected Doctor");
+module.exports = DoctorSchema;
+//module.exports =  mongoose.model('doctor', doctorSchema);

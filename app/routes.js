@@ -5,8 +5,7 @@ module.exports = function(app) {
 
   // server routes ===========================================================
   // handle things like api calls
-  // authentication routes
-  var Doctor = require('./api/createEntities/cEDoctorModel');
+  // authentication routes  
   /*API's for Entities To Create(Add)/Edit/Delete - Patients And Its Data etc*/
 
   //API - /api/createuser
@@ -1000,6 +999,7 @@ module.exports = function(app) {
   });
 
   // Doctor API's
+  //var doctorController = require("./api/createEntities/cEDoctorController");
   // -- api/createdoctor
   app.post('/api/createdoctor', function(req, res) {
     var Doctor = require('./api/createEntities/cEDoctorModel');
@@ -1021,21 +1021,20 @@ module.exports = function(app) {
   });
 
   // -- api/getdoctor
-  app.get('/api/getdoctor', function(req, res) {
+  app.get('/api/getdoctor', function(req, res) { 
     //res.send("unable to get doctor"); 
-    console.log(Doctor);
+    var Doctor = require('./api/createEntities/cEDoctorModel');
      Doctor.find(function(err, doctor) {
-    //   // if there is an error retrieving, send the error.
-    //   // nothing after res.send(err) will execute
-      console.log("doctor" + doctor);
-       if (err)
-       res.send(err);
+       // if there is an error retrieving, send the error.
+      // nothing after res.send(err) will execute
+       console.log("doctor" + doctor);
+        if (err)
+        res.send(err);
 
-    //   res.send(doctor);
-       res.json(doctor); // return all nerds in JSON format
-     });
-  });
-
+    // //   res.send(doctor);
+        res.json(doctor); // return all nerds in JSON format
+      });       
+    });
   // --api/deldoctor
   app.post('/api/deldoctor', function(req, res) {
     console.log(req.body);
