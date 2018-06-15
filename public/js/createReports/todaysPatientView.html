@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row pageHeader">
+    <b>{{ tagline }}<b/>
+  </div>
+  <div class="row">
+      <div class="tableSection">
+        <input type="button" ng-click="getMonthsPatients()" class="btn btn-success" value="Get Last Months Patients" />
+        <input type="number" class="text-center success" ng-model="lastDays"/>
+      </div>
+  </div>
+  <!-- Table for data -->
+  <div class="form-group row tableSection">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th class="text-center success">First Name</th>
+          <th class="text-center success">Last Name</th>
+          <th class="text-center success">Date</th>          
+          <th class="text-center success">Fee Amount</th>
+          <th class="text-center success">Paid Amount</th>
+          <th class="text-center success">Shift</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td class="text-center">Total Patient - {{totalPateint}}</td>
+          <td class="text-center">- - -</td>
+          <td class="text-center">- - -</td>
+          <td class="text-center">Total Fee - {{totalFee}}</td>
+          <td class="text-center">Total Payment - {{totalPayment}}</td>          
+          <td class="text-center">Mrng - {{morning}} / Eve - {{evening}}</td>          
+        </tr>
+        <tr ng-repeat="x in todaysPatient | orderBy: 'x.shiftTime' track by x.id">
+          <td class="text-center">{{x.firstName}}</td>
+          <td class="text-center">{{x.lastName}}</td>
+          <td class="text-center">{{x.date}}</td>          
+          <td class="text-center">{{x.feeAmount}}</td> 
+          <td class="text-center">{{x.paidAmount}}</td>                             
+          <td class="text-center">{{x.shiftTime}}</td>
+        </tr>
+        <tr>
+          <td class="text-center">Total Patient - {{totalPateint}}</td>
+          <td class="text-center">- - -</td>
+          <td class="text-center">- - -</td>
+          <td class="text-center">Total Fee - {{totalFee}}</td>
+          <td class="text-center">Total Payment - {{totalPayment}}</td>          
+          <td class="text-center">Mrng - {{morning}} / Eve - {{evening}}</td>          
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

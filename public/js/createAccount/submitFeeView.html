@@ -11,7 +11,7 @@
           </div>
           <div class="col-md-8">
         			<input name="patient" id="patient" type="text" placeholder="Please Enter Name" ng-model="selected"
-              uib-typeahead="p as p.firstName for p in patient | filter:$viewValue | limitTo:8" class="form-control"
+              uib-typeahead="p as p.firstName +' '+ p.lastName for p in patient | filter:$viewValue | limitTo:8" class="form-control"
               typeahead-editable="false"
               typeahead-on-select="onSelect($item, $model, $label)">
           </div>
@@ -39,15 +39,24 @@
           <label class="col-md-4">Select Fee</label>
           <div class="col-md-6">
             <select class="form-control" ng-model="selected.feeAmount"
-                ng-options="f.Desc for f in fee track by f._id"></select>
+                ng-options="f.Desc for f in fee | orderBy:'Desc' track by f._id"></select>
                 <!-- {{newPateint.Occupation}} -->
           </div>
         </div>
         <div class="form-group row" ng-show="isReplyFormOpen">
-          <label class="col-md-4">Select Payment</label>
+          <label class="col-md-4">Select Shift Timing</label>
           <div class="col-md-6">
-            <select class="form-control" ng-model="selected.paymentMade"
-                ng-options="f.Desc for f in fee track by f._id"></select>
+            <select class="form-control" ng-model="selected.shift"
+                ng-options="f.Desc for f in shift track by f._id"></select>
+                <!-- {{newPateint.Occupation}} -->
+          </div>
+        </div>
+        <div class="form-group row" ng-show="isReplyFormOpen">
+          <label class="col-md-4">Patients Payment</label>
+          <div class="col-md-6">
+            <input class="form-control" type="number" ng-model="selected.paymentMade">
+            <!-- <select class="form-control" ng-model="selected.paymentMade"
+                ng-options="f.Desc for f in fee track by f._id"></select> -->
                 <!-- {{newPateint.Occupation}} -->
           </div>
         </div>
@@ -63,13 +72,20 @@
             <div class="{{statusClass}}">{{statusClass}} = {{sum}}</div>
           </div>
         </div>
+        <div class="form-group row" ng-show="isReplyFormOpen">
+            <label class="col-md-4">Select Date</label>
+            <div class="col-md-6">
+                <input type="date" class="form-control" ng-model="selected.paymentDate" dateformat="d M y"/>
+            </div>
+          </div>        
       </div>
       <div class="col-md-6" ng-show="isReplyFormOpen">
         <div class="form-group row">
           <label class="col-md-4">Avatar</label>
           <div class="col-md-6">
             <!-- <img ng-src="data:image/png;base64,{{image}}"/></div> -->
-            <img ng-src="{{selected.image}}" class="img-responsive"/></div>
+            <!-- <img ng-src="{{selected.image}}" class="img-responsive"/></div> -->
+            <img ng-src="{{filepreview}}" class="img-responsive" ng-show="filepreview"/>
         </div>
       </div>
     </div>
@@ -84,17 +100,19 @@
       <thead>
         <tr>
           <th class="text-center success">Fee Amount</th>
-          <th class="text-center success">Submitted Date</th>
+          <th class="text-center success">Payment Made</th>
           <th class="text-center success">Updated Date</th>
-          <th class="text-center success"></th>
+          <th class="text-center success">Shift</th>
+          <th class="text-center success">Total Visits - {{totalVisits}}</th>
         </tr>
       </thead>
 
       <tbody>
-        <tr ng-repeat="x in submittedFee">
-          <td class="" ng-model="x.feeAmount">{{x.feeAmount}}</td>
-          <td class="" ng-model="x.created_at">{{x.created_at}}</td>
-          <td class="" ng-model="x.updated_at">{{x.updated_at}}</td>
+        <tr ng-repeat="x in submittedFee | orderBy: x.created_at : true">
+          <td class="text-center" ng-model="x.feeAmount">{{x.feeAmount}}</td>
+          <td class="text-center" ng-model="x.paymentMade">{{x.paymentMade}}</td>
+          <td class="text-center" ng-model="x.created_at">{{x.created_at}}</td>
+          <td class="text-center" ng-model="x.shift">{{x.shift}}</td>
           <td class="text-center"><input type="button" ng-click="deletesubmitFee(x._id)" class="btn btn-danger btn-sm" value="Delete"/></td>
           <!-- <td class="text-center"><input type="button" ng-click="editFee()" class="btn btn-primary btn-sm" value="Update"/></td> -->
         </tr>

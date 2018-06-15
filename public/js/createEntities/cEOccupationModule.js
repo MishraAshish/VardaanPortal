@@ -42,6 +42,10 @@ angular.module('cEOccupation').controller('cEOccupationController',['$scope','$h
         $scope.getOccupation = function() {
           $http.get('/api/getoccupation').then(function(data){
               $scope.occupation = data.data;
+              $scope.occupation.sort(function(a, b) {
+                return a.Desc > b.Desc;
+              });
+              $scope.occupation.sort();
           });
         };
 

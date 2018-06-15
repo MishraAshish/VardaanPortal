@@ -27,6 +27,32 @@ define(function () {
                         }
                     }
                 })
+                .state('todaysPatient', {
+                    url: '/todaysPatient',
+                    templateUrl: '/js/createReports/todaysPatientView.html',
+                    controller: 'todaysPatientController',
+                    resolve: {
+                        load: function($ocLazyLoad) {
+                            return $ocLazyLoad.load ({
+                                name: 'todaysPatient',
+                                files: ['js/createReports/todaysPatientModule.js']
+                            });
+                        }
+                    }
+                })
+                .state('cPCreateDoctorProfile', {
+                    url: '/cPCreateDoctorProfile',
+                    templateUrl: '/js/createPatient/cPCreateDoctorProfileView.html',
+                    controller: 'cPCreateDoctorProfileController',
+                    resolve: {
+                        load: function($ocLazyLoad) {
+                            return $ocLazyLoad.load ({
+                                name: 'cPCreateDoctorProfile',
+                                files: ['js/createPatient/cPCreateDoctorProfileModule.js']
+                            });
+                        }
+                    }
+                })
                 .state('cECheifComplaints', {
                     url: '/chiefComplaints',
                     templateUrl: '/js/createEntities/cECheifComplaintsView.html',

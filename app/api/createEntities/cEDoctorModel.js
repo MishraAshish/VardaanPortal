@@ -15,10 +15,10 @@ var doctorSchema = new Schema({
 
 var DoctorSchema = mongoose.model('doctor', doctorSchema);
 
-if (mongoose.connection.readyState == 0) {
-  mongoose.connect('mongodb://localhost/myapp');
-  console.log("DB Connected");
-}
-console.log("DB Already Connected Doctor");
+//if (mongoose.connection.readyState == 0) {
+//  mongoose.connect('mongodb://localhost/myapp');
+//  console.log("DB Connected");
+//}
+//console.log("DB Already Connected Doctor");
 module.exports = DoctorSchema;
 //module.exports =  mongoose.model('doctor', doctorSchema);

@@ -11,7 +11,7 @@ global.__base = __dirname + '/';
 
 // config files
 //var db = require('./config/db');
- mongoose.connect('mongodb://localhost/myapp',{useMongoClient:true});
+ mongoose.connect('mongodb://127.0.0.1/myapp',{useMongoClient:true});
 // set our port
 var port = process.env.PORT || 8080;
 
@@ -36,9 +36,9 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(express.static(__dirname + '/public'));
 
 // routes ==================================================
-//require('./app/routes')(app); // configure our routes
-var router = require('./app/routerTest');
-app.use('/api', router);
+require('./app/routes')(app); // configure our routes
+//var router = require('./app/routerTest');
+//app.use('/api', router);
 // start app ===============================================
 // startup our app at http://localhost:8080
 app.listen(port);

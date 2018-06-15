@@ -3,12 +3,14 @@ angular.module('submitFee',["ui.bootstrap"]);
 angular.module('submitFee').controller('submitFeeController',['$scope','$http',function($scope, $http){
 
         $scope.tagline = 'Fee Submission For Patients!';
-        $scope.selected = undefined;
+        $scope.selected = [];
         $scope.isReplyFormOpen = false;
         $scope.showSubmittedFee = false;
         $scope.sum = 0;
-        $scope.statusClass = "Credit";
-
+        $scope.statusClass = "Credit";        
+        $scope.shift = [{"_id":"-1","Desc":"--Please Select--","__v":0},
+        {"_id":"1","Desc":"Morning"},
+        {"_id":"2","Desc":"Evening"}];
         $scope.getPatients = function() {
           $http.get('/api/getpatients').then(function(data){
               $scope.patient = data.data;
@@ -26,13 +28,14 @@ angular.module('submitFee').controller('submitFeeController',['$scope','$http',f
               $scope.fee = data.data;
               $scope.isReplyFormOpen = true;
               $scope.selected.feeAmount = {"_id":"-1","Desc":"--Please Select--","__v":0};
-              $scope.selected.paymentMade = {"_id":"-1","Desc":"--Please Select--","__v":0};
+              //$scope.selected.paymentMade = {"_id":"-1","Desc":"--Please Select--","__v":0};
+              $scope.selected.shift = {"_id":"-1","Desc":"--Please Select--","__v":0};              
             }},
             function(data){
               //failure function
               if (data) {
                 data.data.push({"_id":"-1","Desc":"--Please Select--","__v":0});
-                $scope.fee = data.data;
+                $scope.fee = data.data;                
               }
           });
         };
@@ -57,8 +60,8 @@ angular.module('submitFee').controller('submitFeeController',['$scope','$http',f
                   $scope.sum = sumArr.reduce((a, b) => a + b, 0);
                   //template replaces the complete element with its text.
                   $scope.statusClass = ($scope.sum == 0 || $scope.sum > 0 ) ? 'Credit' : 'Debit';
-              }
-
+                  $scope.totalVisits = $scope.submittedFee.length;
+              }            
             }},
             function(data){
               //failure function
@@ -69,22 +72,42 @@ angular.module('submitFee').controller('submitFeeController',['$scope','$http',f
         };
 
         $scope.submitFee = function() {
+          
           if (!$scope.selected.feeAmount.Desc || $scope.selected.feeAmount._id == -1 ||
-              !$scope.selected.paymentMade.Desc || $scope.selected.paymentMade._id == -1) {
+              $scope.selected.paymentMade === undefined) {
             alert("Fee Can't be Submitted. Please select a proper value!");
             return false;
           }
+          if ($scope.selected.shift._id == -1) {
+            alert("Please select Proper Timing");
+            return false;
+          }
+          if($scope.selected.paymentDate === undefined) {
+            alert("Please select Proper Date");
+            return false;
+          }
+          var paymentDateSet = "";
+          if($scope.selected.paymentDate)
+          {             
+            paymentDateSet = typeof $scope.selected.paymentDate == "string" ? new Date() : $scope.selected.paymentDate;
+            paymentDateSet = paymentDateSet.getDate() +"-" + (paymentDateSet.getMonth()+1) +"-" + paymentDateSet.getFullYear();
+          }
           var submittingFeeObj = {
             feeAmount : $scope.selected.feeAmount.Desc,
-            paymentMade : $scope.selected.paymentMade.Desc,
+            paymentMade : $scope.selected.paymentMade,
             patientId : $scope.selected.patientId,
             settlementAmount : $scope.selected.settlementAmount,
             existingPatient : $scope.selected.existingPatient,
+            paymentDate : paymentDateSet,
+            shift : $scope.selected.shift.Desc
           };
+          
           $http.post('/api/feesubmit',submittingFeeObj).then(function(data){
             //success function
             if (data) {
-              $scope.getSubmittedFee();
+              alert("Todays fee has been submitted successfully!");
+              $scope.getSubmittedFee();              
+              $scope.selected.paymentMade = "";              
             }},
             function(data){
               //failure function
@@ -107,7 +130,7 @@ angular.module('submitFee').controller('submitFeeController',['$scope','$http',f
           $scope.$item = $item;
           $scope.$model = $model;
           $scope.$label = $label;
-          $scope.selected.image = $item.image;
+          //$scope.selected.image = $item.image;
           $scope.selected.patientId = $item._id;
           $scope.selected.firstName = $item.firstName;
           $scope.selected.lastName = $item.lastName;
@@ -116,7 +139,20 @@ angular.module('submitFee').controller('submitFeeController',['$scope','$http',f
           $scope.selected.existingPatient = false;
           $scope.sum = 0;
           $scope.statusClass = "Credit";
+          $scope.filepreview = 'img/Camera Roll/'+ $item.image;
           $scope.getFee();
           $scope.getSubmittedFee();
       };
 }]);
+// angular.module("date", [])
+//     .directive("datepicker", function () {
+//     return {
+//         restrict: "A",
+//         link: function (scope, el, attr) {
+//             el.datepicker({
+//                             dateFormat: 'yy-mm-dd'
+//                         });
+//         }
+//     };
+// }).controller("submitFeeController", function ($scope) {
+// });

@@ -12,9 +12,15 @@ angular.module('viewReports').controller('createreportsController',['$scope','$h
         $scope.series = [];
 
         $scope.chartDetails = [
-              { name: "Chief Complaints",  id:1},
+              { name: "Reference",  id:1},
               { name: "Location",  id:2},
-              { name: "Gender",  id:3}
+              { name: "Gender",  id:3},
+              { name: "Disease",  id:3},
+              { name: "Month/Year",  id:3},
+              { name: "Occupation",  id:3},
+              { name: "Age",  id:3},
+              { name: "Monthly Income",  id:3},
+              { name: "Monthly Expenses",  id:3}
             ];
         $scope.selected = {};
         $scope.selected.chartFor = { name: "Chief Complaints",  id:1}; // For Male Defaulting for Male

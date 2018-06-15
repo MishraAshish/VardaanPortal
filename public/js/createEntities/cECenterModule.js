@@ -41,7 +41,7 @@ angular.module('cECenter').controller('cECenterController',['$scope','$http',fun
 
         $scope.getCenter = function() {
           $http.get('/api/getcenter').then(function(data){
-              $scope.center = data.data;
+              $scope.center = data.data;              
           });
         };
 

@@ -19,9 +19,9 @@ var CheifComplaints = mongoose.model('cheifComplaints', cheifComplaintsSchema);
   //  name : {type : String, default: ''}
 //});
 
-if (mongoose.connection.readyState == 0) {
-  mongoose.connect('mongodb://localhost/myapp');
-  console.log("DB Connected");
-}
-console.log("DB Already Connected");
+//if (mongoose.connection.readyState == 0) {
+//  mongoose.connect('mongodb://localhost/myapp');
+//  console.log("DB Connected");
+//}
+//console.log("DB Already Connected");
 module.exports = CheifComplaints;

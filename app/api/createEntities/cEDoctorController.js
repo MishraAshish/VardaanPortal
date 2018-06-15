@@ -11,7 +11,7 @@ var DoctorController = {
         DoctorModel.find(function(err, doctor) {
         // if there is an error retrieving, send the error.
         // nothing after res.send(err) will execute
-       console.log("doctor" + doctor);
+        console.log("doctor" + doctor);
         if (err)
         res.send(err);
 

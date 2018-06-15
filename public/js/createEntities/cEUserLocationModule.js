@@ -42,6 +42,10 @@ angular.module('cELocation').controller('cELocationController',['$scope','$http'
         $scope.getLocation = function() {
           $http.get('/api/getlocation').then(function(data){
               $scope.location = data.data;
+              $scope.location.sort(function(a, b) {
+                return a.Desc > b.Desc;
+              });
+              $scope.location.sort();
           });
         };
 

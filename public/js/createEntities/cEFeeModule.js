@@ -42,6 +42,10 @@ angular.module('cEFee').controller('cEFeeController',['$scope','$http',function(
         $scope.getFee = function() {
           $http.get('/api/getfee').then(function(data){
               $scope.fee = data.data;
+              $scope.fee.sort(function(a, b) {
+                return a.Desc > b.Desc;
+              });
+              $scope.fee.sort();
           });
         };
 

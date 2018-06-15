@@ -12,8 +12,9 @@ var feesubmitSchema = new Schema({
   settlementAmount: Number,
   patientId: String,
   existingPatient: Boolean,
+  shift: String,
   created_at: String,
-  updated_at: Date
+  updated_at: String
 });
 
 // the schema is useless so far
@@ -25,9 +26,9 @@ var Feesubmit = mongoose.model('feesubmit', feesubmitSchema);
   //  name : {type : String, default: ''}
 //});
 
-if (mongoose.connection.readyState == 0) {
-  mongoose.connect('mongodb://localhost/myapp');
-  console.log("DB Connected");
-}
-console.log("DB Already Connected");
+//if (mongoose.connection.readyState == 0) {
+//  mongoose.connect('mongodb://localhost/myapp');
+//  console.log("DB Connected");
+//}
+//console.log("DB Already Connected");
 module.exports = Feesubmit;

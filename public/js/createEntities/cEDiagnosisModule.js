@@ -42,6 +42,10 @@ angular.module('cEDiagnosis').controller('cEDiagnosisController',['$scope','$htt
         $scope.getDiagnosis = function() {
           $http.get('/api/getdiagnosis').then(function(data){
               $scope.diagnosis = data.data;
+              $scope.diagnosis.sort(function(a, b) {
+                return a.Desc > b.Desc;
+              });
+              $scope.diagnosis.sort();
           });
         };
 

@@ -14,9 +14,9 @@ var addExpenseTypeSchema = new Schema({
 // we need to create a model using it
 var ExpenseTypeSchema = mongoose.model('expenseType', addExpenseTypeSchema);
 
-if (mongoose.connection.readyState == 0) {
-  mongoose.connect('mongodb://localhost/myapp');
-  console.log("DB Connected");
-}
-console.log("DB Already Connected");
+//if (mongoose.connection.readyState == 0) {
+//  mongoose.connect('mongodb://localhost/myapp');
+//  console.log("DB Connected");
+//}
+//console.log("DB Already Connected");
 module.exports = ExpenseTypeSchema;

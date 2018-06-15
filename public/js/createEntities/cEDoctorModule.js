@@ -42,6 +42,10 @@ angular.module('cEDoctor').controller('cEDoctorController',['$scope','$http',fun
         $scope.getDoctor = function() {
           $http.get('/api/getdoctor').then(function(data){
               $scope.doctor = data.data;
+              $scope.doctor.sort(function(a, b) {
+                return a.Desc > b.Desc;
+              });
+              $scope.doctor.sort();
           });
         };
 

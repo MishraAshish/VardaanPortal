@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="row pageHeader">
+    <b>{{ tagline }}
+      <b/>
+  </div>
+  <div class="form-group addSection">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group row">
+          <label class="col-md-4">Name</label>
+          <div class="col-md-6">
+            <input class="form-control" type="text" ng-model="newDoctorProfile.Name">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-4">Contact</label>
+          <div class="col-md-6">
+            <input class="form-control" type="number" ng-model="newDoctorProfile.Mobile" ng-maxlength="10">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-4">Qualification</label>
+          <div class="col-md-6">
+            <input class="form-control" type="text" ng-model="newDoctorProfile.Qualification">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-4">Days</label>
+          <div class="col-md-6">
+            <input class="form-control" type="text" ng-model="newDoctorProfile.Days">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-4">Clinic Timings</label>
+          <div class="col-md-6">
+            <input class="form-control" type="text" ng-model="newDoctorProfile.Timings">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-4">Address</label>
+          <div class="col-md-6">
+            <textarea class="form-control" rows="3" ng-model="newDoctorProfile.Address"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row text-center">
+      <input type="button" ng-click="addDoctorProf()" class="btn btn-success" value="Save" />
+    </div>
+  </div>
+
+  <!-- Table for data -->
+  <div class="form-group row tableSection">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th class="text-center success">Name</th>          
+          <th class="text-center success">Mobile</th>
+          <th class="text-center success">Timings</th>          
+          <th class="text-center success">Days</th>
+          <th class="text-center success">Address</th>
+          <th class="text-center success">Qualification</th>
+          <th class="text-center success"></th>          
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="x in patient | orderBy:'name'">
+          <td class="" ng-model="x.name">{{x.name}}</td>
+          <td class="" ng-model="x.mobile">{{x.mobile}}</td>
+          <td class="" ng-model="x.timings">{{x.timing}}</td>
+          <td class="" ng-model="x.days">{{x.days}}</td>
+          <td class="" ng-model="x.address">{{x.address}}</td>
+          <td class="" ng-model="x.qualification">{{x.qualification}}</td>
+          <td class="text-center">
+            <input type="button" ng-click="deleteDocProf(x._id)" class="btn btn-danger btn-sm" value="Delete" />
+          </td>          
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -42,6 +42,10 @@ angular.module('cERefer').controller('cEReferController',['$scope','$http',funct
         $scope.getRefer = function() {
           $http.get('/api/getrefer').then(function(data){
               $scope.refer = data.data;
+              $scope.refer.sort(function(a, b) {
+                return a.Desc > b.Desc;
+              });
+              $scope.refer.sort();
           });
         };
 

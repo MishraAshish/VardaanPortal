@@ -42,6 +42,10 @@ angular.module('cETreatments').controller('cETreatmentsController',['$scope','$h
         $scope.getTreatments = function() {
           $http.get('/api/gettreatments').then(function(data){
               $scope.treatments = data.data;
+              $scope.treatments.sort(function(a, b) {
+                return a.Desc > b.Desc;
+              });
+              $scope.treatments.sort();
           });
         };
 
