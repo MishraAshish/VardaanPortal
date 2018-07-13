@@ -6,7 +6,6 @@ var app            = express();
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var mongoose = require('mongoose');
-var fallback = require('express-history-api-fallback')
 global.__base = __dirname + '/';
 // configuration ===========================================
 
@@ -36,7 +35,7 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 // set the static files location /public/img will be /img for users
 var root = __dirname + '/public';
 app.use(express.static(root));
-app.use(fallback('index.html', { root: root }))
+//app.use(fallback('index.html', { root: root, }));
 // routes ==================================================
 require('./app/routes')(app); // configure our routes
 //var router = require('./app/routerTest');
