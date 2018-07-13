@@ -28,7 +28,8 @@ Run : node server.js
 
 * Summary of set up
   to create :
-  git clone : https://ashishu025@bitbucket.org/ashishu025/vardaan_portal.git
+  git clone : https://github.com/MishraAshish/VardaanPortal.git
+  bitbucket clone : https://ashishu025@bitbucket.org/ashishu025/vardaan_portal.git
   after changes :
   git commit -m "commit message"
   to push to branch :
