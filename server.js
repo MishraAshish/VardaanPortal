@@ -2,7 +2,8 @@
 
 // modules =================================================
 var express        = require('express');
-var app            = express();
+var app            = express(),
+    cors = require('cors');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var mongoose = require('mongoose');
@@ -13,7 +14,7 @@ global.__base = __dirname + '/';
 //var db = require('./config/db');
  mongoose.connect('mongodb://127.0.0.1/myapp',{useMongoClient:true});
 // set our port
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 8082;
 
 // connect to our mongoDB database
 // (uncomment after you enter in your own credentials in config/db.js)
@@ -34,6 +35,7 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 
 // set the static files location /public/img will be /img for users
 var root = __dirname + '/public';
+app.use(cors());
 app.use(express.static(root));
 //app.use(fallback('index.html', { root: root, }));
 // routes ==================================================
